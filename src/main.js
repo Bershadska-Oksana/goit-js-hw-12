@@ -5,7 +5,7 @@ import {
   showLoader,
   hideLoader,
   showLoadMoreButton,
-  hideLoadMoreButton
+  hideLoadMoreButton,
 } from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -17,17 +17,17 @@ let totalHits = 0;
 const form = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit', async e => {
   e.preventDefault();
-  query = e.target.searchQuery.value.trim();
+  query = e.target['search-text'].value.trim();
   if (!query) return;
 
   page = 1;
   clearGallery();
   hideLoadMoreButton();
-  
+
   showLoader();
-  
+
   try {
     const data = await getImagesByQuery(query, page);
     totalHits = data.totalHits;
@@ -41,6 +41,7 @@ form.addEventListener('submit', async (e) => {
     if (totalHits > 15) showLoadMoreButton();
   } catch (error) {
     iziToast.error({ message: 'Something went wrong' });
+    console.error(error);
   } finally {
     hideLoader();
   }
@@ -60,10 +61,14 @@ loadMoreBtn.addEventListener('click', async () => {
       iziToast.info({ message: 'You reached the end of results' });
     }
 
-    const { height } = document.querySelector('.gallery a').getBoundingClientRect();
-    window.scrollBy({ top: height * 2, behavior: 'smooth' });
-  } catch {
+    const firstImage = document.querySelector('.gallery a');
+    if (firstImage) {
+      const { height } = firstImage.getBoundingClientRect();
+      window.scrollBy({ top: height * 2, behavior: 'smooth' });
+    }
+  } catch (error) {
     iziToast.error({ message: 'Error loading more images' });
+    console.error(error);
   } finally {
     hideLoader();
   }
