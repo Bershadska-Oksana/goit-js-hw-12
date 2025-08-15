@@ -1,27 +1,26 @@
 {
-  "name": "/goit-js-hw-12/",
+  "name": "goit-js-hw-12",
   "version": "1.0.0",
-  "description": "JavaScript homework 12 - Pixabay image search app with pagination",
-  "main": "src/main.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/goit-js-hw-12/",
     "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prettier": "^3.3.3",
-    "vite": "^5.2.0"
+    "vite": "^5.3.3",
+    "vite-plugin-full-reload": "^1.1.0",
+    "vite-plugin-html-inject": "^1.0.1",
+    "postcss-sort-media-queries": "^4.4.1",
+    "glob": "^10.3.10"
   },
   "dependencies": {
     "axios": "^1.7.2",
-    "glob": "^11.0.3",
-    "izitoast": "^1.4.0",
-    "postcss-sort-media-queries": "^5.2.0",
     "simplelightbox": "^2.14.1",
-    "vite-plugin-full-reload": "^1.2.0",
-    "vite-plugin-html-inject": "^1.1.2"
+    "izitoast": "^1.4.0"
   }
 }
