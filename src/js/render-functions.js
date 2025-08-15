@@ -2,22 +2,46 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
+const loadMoreBtn = document.querySelector('.load-more');
 
-const lightbox = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
-export function createGallery(images) {
-  const markup = images.map(img => `
-    <a href="${img.largeImageURL}">
-      <img src="${img.webformatURL}" alt="${img.tags}" />
-    </a>
-  `).join('');
+export function renderGallery(images, append = false) {
+  const markup = images
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `
+    <a href="${largeImageURL}" class="gallery-item">
+      <div class="photo-card">
+        <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        <div class="info">
+          <p><b>Likes:</b> ${likes}</p>
+          <p><b>Views:</b> ${views}</p>
+          <p><b>Comments:</b> ${comments}</p>
+          <p><b>Downloads:</b> ${downloads}</p>
+        </div>
+      </div>
+    </a>`
+    )
+    .join('');
 
-  gallery.insertAdjacentHTML('beforeend', markup);
+  if (append) {
+    gallery.insertAdjacentHTML('beforeend', markup);
+  } else {
+    gallery.innerHTML = markup;
+  }
+
   lightbox.refresh();
 }
 
@@ -33,10 +57,10 @@ export function hideLoader() {
   loader.classList.add('hidden');
 }
 
-export function showLoadMoreButton() {
+export function showLoadMoreBtn() {
   loadMoreBtn.classList.remove('hidden');
 }
 
-export function hideLoadMoreButton() {
+export function hideLoadMoreBtn() {
   loadMoreBtn.classList.add('hidden');
 }
