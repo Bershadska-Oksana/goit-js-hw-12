@@ -17,7 +17,7 @@
         <label>
           <input
             type="text"
-            name="search-text"
+            name="searchQuery"
             placeholder="Search images..."
             required
           />
@@ -25,13 +25,10 @@
         <button type="submit">Search</button>
       </form>
 
-      <div class="loader-backdrop" id="loader">
-        <span class="loader"></span>
-      </div>
+      <div class="loader hidden"></div>
 
-      <ul class="gallery" id="gallery"></ul>
-
-      <button type="button" id="load-more" class="load-more">Load More</button>
+      <div class="gallery"></div>
+      <button type="button" class="load-more hidden">Load More</button>
     </main>
 
     <footer class="container">
