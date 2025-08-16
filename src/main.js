@@ -33,6 +33,8 @@ async function onSearch(e) {
       message: 'Please enter a search query!',
       position: 'topRight',
     });
+    hideLoader(); // <- додати, якщо перед цим викликався showLoader
+    hideLoadMoreBtn(); // ховаємо кнопку на випадок, якщо вона видима
     return;
   }
 

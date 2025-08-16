@@ -50,17 +50,17 @@ export function clearGallery() {
 }
 
 export function showLoader() {
-  loader.classList.remove('hidden');
+  document.querySelector('.loader').classList.remove('hidden');
 }
 
 export function hideLoader() {
-  loader.classList.add('hidden');
+  document.querySelector('.loader').classList.add('hidden');
 }
 
 export function showLoadMoreBtn() {
-  loadMoreBtn.classList.remove('hidden');
+  document.querySelector('.load-more').classList.remove('hidden');
 }
 
 export function hideLoadMoreBtn() {
-  loadMoreBtn.classList.add('hidden');
+  document.querySelector('.load-more').classList.add('hidden');
 }
