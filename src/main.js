@@ -36,7 +36,7 @@ async function onSearch(e) {
     return;
   }
 
-  hideLoadMoreBtn(); // одразу ховаємо кнопку
+  hideLoadMoreBtn();
   showLoader();
 
   try {
@@ -70,14 +70,13 @@ async function onSearch(e) {
 async function onLoadMore() {
   page += 1;
 
-  hideLoadMoreBtn(); // ❗ ховаємо кнопку під час запиту
+  hideLoadMoreBtn();
   showLoader();
 
   try {
     const data = await fetchImages(query, page, perPage);
     renderGallery(data.hits);
 
-    // якщо досягли кінця
     const totalPages = Math.ceil(data.totalHits / perPage);
     if (page >= totalPages) {
       iziToast.info({
@@ -86,10 +85,9 @@ async function onLoadMore() {
         position: 'topRight',
       });
     } else {
-      showLoadMoreBtn(); // тільки після відповіді показуємо кнопку
+      showLoadMoreBtn();
     }
 
-    // плавний скрол
     const { height: cardHeight } =
       gallery.firstElementChild.getBoundingClientRect();
     window.scrollBy({
