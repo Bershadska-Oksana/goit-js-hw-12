@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Search</title>
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      .hidden {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -21,8 +26,8 @@
 
     <main>
       <div class="gallery"></div>
-      <div class="loader" style="display: none">Loading...</div>
-      <button class="load-more" style="display: none">Load more</button>
+      <div class="loader hidden">Loading...</div>
+      <button class="load-more hidden">Load more</button>
     </main>
 
     <script type="module" src="./main.js"></script>
