@@ -1,21 +1,30 @@
-const gallery = document.querySelector('.gallery'); const loader =
-document.querySelector('.loader'); const loadMoreBtn =
-document.querySelector('.load-more'); export function renderGallery(images,
-append = false) { const markup = images .map( image => `
-<div class="photo-card">
-  <a href="${image.largeImageURL}" target="_blank" rel="noopener noreferrer">
-    <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
-  </a>
-  <div class="info">
-    <p><b>Likes:</b> ${image.likes}</p>
-    <p><b>Views:</b> ${image.views}</p>
-    <p><b>Comments:</b> ${image.comments}</p>
-    <p><b>Downloads:</b> ${image.downloads}</p>
-  </div>
-</div>
-` ) .join(''); if (append) { gallery.insertAdjacentHTML('beforeend', markup); }
-else { gallery.innerHTML = markup; } } export function clearGallery() {
-gallery.innerHTML = ''; } export function showLoader() { loader.style.display =
-'block'; } export function hideLoader() { loader.style.display = 'none'; }
-export function showLoadMoreBtn() { loadMoreBtn.style.display = 'block'; }
-export function hideLoadMoreBtn() { loadMoreBtn.style.display = 'none'; }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Search App</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <form id="search-form" class="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          placeholder="Search images..."
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
+    <main>
+      <div class="gallery"></div>
+      <div class="loader hidden">Loading...</div>
+      <button class="load-more hidden">Load More</button>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
