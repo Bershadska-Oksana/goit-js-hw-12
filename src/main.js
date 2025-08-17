@@ -24,7 +24,7 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 async function onSearch(event) {
   event.preventDefault();
 
-  const searchValue = event.currentTarget.elements.searchQuery.value.trim();
+  const searchValue = event.currentTarget.elements['searchQuery'].value.trim();
 
   if (!searchValue) {
     iziToast.error({
