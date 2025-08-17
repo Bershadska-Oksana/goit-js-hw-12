@@ -12,8 +12,8 @@
     </style>
   </head>
   <body>
-    <header>
-      <form id="search-form">
+    <header class="container">
+      <form class="form" id="search-form">
         <input
           type="text"
           name="searchQuery"
@@ -24,11 +24,21 @@
       </form>
     </header>
 
-    <main>
-      <div class="gallery"></div>
-      <div class="loader hidden">Loading...</div>
-      <button class="load-more hidden">Load more</button>
+    <main class="container">
+      <ul class="gallery" id="gallery"></ul>
+
+      <div class="loader-backdrop hidden" id="loader">
+        <span class="loader"></span>
+      </div>
+
+      <button type="button" id="load-more" class="load-more hidden">
+        Load more
+      </button>
     </main>
+
+    <footer class="container">
+      <p>&copy; 2025 Pixabay Search App</p>
+    </footer>
 
     <script type="module" src="./main.js"></script>
   </body>
