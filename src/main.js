@@ -1,4 +1,4 @@
-import { fetchImages } from './js/pixabay-api';
+import { fetchImages } from '@/js/pixabay-api';
 import {
   renderGallery,
   clearGallery,
@@ -6,7 +6,7 @@ import {
   hideLoader,
   showLoadMoreBtn,
   hideLoadMoreBtn,
-} from './js/render-functions';
+} from '@/js/render-functions';
 import iziToast from 'izitoast';
 
 const form = document.querySelector('#search-form');
@@ -26,6 +26,8 @@ async function onSearch(e) {
   query = e.currentTarget.elements.searchQuery.value.trim();
   page = 1;
   clearGallery();
+  hideLoadMoreBtn();
+  showLoader();
 
   if (!query) {
     iziToast.error({
@@ -33,13 +35,9 @@ async function onSearch(e) {
       message: 'Please enter a search query!',
       position: 'topRight',
     });
-    hideLoader(); // <- додати, якщо перед цим викликався showLoader
-    hideLoadMoreBtn(); // ховаємо кнопку на випадок, якщо вона видима
+    hideLoader();
     return;
   }
-
-  hideLoadMoreBtn();
-  showLoader();
 
   try {
     const data = await fetchImages(query, page, perPage);
@@ -50,13 +48,17 @@ async function onSearch(e) {
         message: 'Sorry, no images found. Try another query.',
         position: 'topRight',
       });
+      hideLoadMoreBtn();
       return;
     }
 
     renderGallery(data.hits);
 
-    if (data.totalHits > perPage) {
+    const totalPages = Math.ceil(data.totalHits / perPage);
+    if (totalPages > 1) {
       showLoadMoreBtn();
+    } else {
+      hideLoadMoreBtn();
     }
   } catch (error) {
     iziToast.error({
@@ -71,7 +73,6 @@ async function onSearch(e) {
 
 async function onLoadMore() {
   page += 1;
-
   hideLoadMoreBtn();
   showLoader();
 
@@ -80,22 +81,25 @@ async function onLoadMore() {
     renderGallery(data.hits);
 
     const totalPages = Math.ceil(data.totalHits / perPage);
-    if (page >= totalPages) {
+    if (page < totalPages) {
+      showLoadMoreBtn();
+    } else {
+      hideLoadMoreBtn();
       iziToast.info({
         title: 'End',
         message: "You've reached the end of search results.",
         position: 'topRight',
       });
-    } else {
-      showLoadMoreBtn();
     }
 
-    const { height: cardHeight } =
-      gallery.firstElementChild.getBoundingClientRect();
-    window.scrollBy({
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
+    if (gallery.firstElementChild) {
+      const { height: cardHeight } =
+        gallery.firstElementChild.getBoundingClientRect();
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+      });
+    }
   } catch (error) {
     iziToast.error({
       title: 'Error',
