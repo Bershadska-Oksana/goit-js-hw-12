@@ -1,4 +1,4 @@
-import { fetchImages } from '@/js/pixabay-api';
+import { fetchImages } from './js/pixabay-api.js';
 import {
   renderGallery,
   clearGallery,
@@ -6,7 +6,7 @@ import {
   hideLoader,
   showLoadMoreBtn,
   hideLoadMoreBtn,
-} from '@/js/render-functions';
+} from './js/render-functions.js';
 import iziToast from 'izitoast';
 
 const form = document.querySelector('#search-form');
