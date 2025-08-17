@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Search App</title>
-    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Image Search</title>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header>
-      <form id="search-form" class="search-form">
+      <form id="search-form">
         <input
           type="text"
           name="searchQuery"
@@ -21,8 +21,8 @@
 
     <main>
       <div class="gallery"></div>
-      <div class="loader hidden">Loading...</div>
-      <button type="button" class="load-more hidden">Load More</button>
+      <div class="loader" style="display: none">Loading...</div>
+      <button class="load-more" style="display: none">Load more</button>
     </main>
 
     <script type="module" src="./main.js"></script>
