@@ -18,13 +18,29 @@ const perPage = 15;
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
 
+console.log('DEBUG: searchForm =', searchForm); // 🟢 перевіримо чи форма знайдена
+console.log('DEBUG: loadMoreBtn =', loadMoreBtn);
+
 searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
 async function onSearch(event) {
   event.preventDefault();
+  console.log('DEBUG: onSearch triggered ✅');
 
-  const searchValue = event.currentTarget.elements['searchQuery'].value.trim();
+  console.log(
+    'DEBUG: event.currentTarget.elements =',
+    event.currentTarget.elements
+  );
+  const searchInput = event.currentTarget.elements['searchQuery'];
+
+  if (!searchInput) {
+    console.error('❌ ERROR: searchQuery input not found у формі');
+    return;
+  }
+
+  const searchValue = searchInput.value.trim();
+  console.log('DEBUG: searchValue =', searchValue);
 
   if (!searchValue) {
     iziToast.error({
@@ -43,6 +59,12 @@ async function onSearch(event) {
 
   try {
     const data = await fetchImages(query, page, perPage);
+    console.log('DEBUG: fetchImages response =', data);
+
+    if (!data || !data.hits) {
+      console.error('❌ ERROR: API response is invalid');
+      return;
+    }
 
     if (data.hits.length === 0) {
       iziToast.warning({
@@ -59,6 +81,7 @@ async function onSearch(event) {
       showLoadMoreBtn();
     }
   } catch (error) {
+    console.error('❌ ERROR in onSearch:', error);
     iziToast.error({
       title: 'Error',
       message: 'Something went wrong while fetching data.',
@@ -70,12 +93,15 @@ async function onSearch(event) {
 }
 
 async function onLoadMore() {
+  console.log('DEBUG: onLoadMore triggered ✅');
   page += 1;
   hideLoadMoreBtn();
   showLoader();
 
   try {
     const data = await fetchImages(query, page, perPage);
+    console.log('DEBUG: fetchImages response (load more) =', data);
+
     renderGallery(data.hits, true);
 
     const totalPages = Math.ceil(data.totalHits / perPage);
@@ -91,6 +117,7 @@ async function onLoadMore() {
 
     smoothScroll();
   } catch (error) {
+    console.error('❌ ERROR in onLoadMore:', error);
     iziToast.error({
       title: 'Error',
       message: 'Failed to load more images.',
