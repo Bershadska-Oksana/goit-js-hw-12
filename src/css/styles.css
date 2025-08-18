@@ -128,3 +128,11 @@ footer {
   color: #666;
   font-size: 14px;
 }
+footer.container {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  color: #666;
+  font-size: 14px;
+}
