@@ -10,6 +10,7 @@ import {
 
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import './css/styles.css';
 
 let query = '';
 let page = 1;
@@ -18,7 +19,7 @@ const perPage = 15;
 const searchForm = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
 
-console.log('DEBUG: searchForm =', searchForm); // 🟢 перевіримо чи форма знайдена
+console.log('DEBUG: searchForm =', searchForm);
 console.log('DEBUG: loadMoreBtn =', loadMoreBtn);
 
 searchForm.addEventListener('submit', onSearch);

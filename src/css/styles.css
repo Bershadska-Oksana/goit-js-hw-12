@@ -120,7 +120,7 @@ body {
   display: none !important;
 }
 
-footer {
+footer.container {
   text-align: center;
   padding: 20px 0;
   margin-top: 40px;
@@ -128,7 +128,7 @@ footer {
   color: #666;
   font-size: 14px;
 }
-footer.container {
+footer {
   text-align: center;
   padding: 20px 0;
   margin-top: 40px;
